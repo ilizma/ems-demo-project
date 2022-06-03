@@ -41,6 +41,7 @@ dependencies {
     // region Api
     implementation(project(":api-di"))
     implementation(project(":api"))
+    implementation(project(":api-imp"))
     // endregion
 
     // region Base

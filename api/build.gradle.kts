@@ -14,6 +14,6 @@ dependencies {
     // endregion
 
     // region Network
-    implementation(Network.gson)
+    implementation(Network.moshi)
     // endregion
 }

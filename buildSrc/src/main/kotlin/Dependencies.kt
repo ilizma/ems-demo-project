@@ -46,7 +46,8 @@ object CustomActivityOnCrash {
 }
 
 object Network {
-    val gson by lazy { "com.google.code.gson:gson:${Versions.gsonVersion}" }
+    val moshi by lazy { "com.squareup.moshi:moshi:${Versions.moshiVersion}" }
+    val moshiKotlin by lazy { "com.squareup.moshi:moshi-kotlin:${Versions.moshiVersion}" }
 }
 
 object Di {

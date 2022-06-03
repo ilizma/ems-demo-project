@@ -12,7 +12,7 @@ import dagger.hilt.android.components.FragmentComponent
 object DashboardScreenFragmentBinderModule {
 
     @Provides
-    fun provideMenuScreenFragmentBinder(
+    fun provideDashboardScreenFragmentBinder(
 
     ): DashboardScreenFragmentBinder = DashboardScreenFragmentBinderImp(
 

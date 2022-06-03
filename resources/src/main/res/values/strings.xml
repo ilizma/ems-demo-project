@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">BaseProject</string>
+    <string name="app_name" translatable="false">EMS Demo</string>
 
     <string name="crash_activity_message">An unexpected error has occurred. Sorry for the inconvenience.</string>
     <string name="crash_activity_restart_button">RESTART APP</string>

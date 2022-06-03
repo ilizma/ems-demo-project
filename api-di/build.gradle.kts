@@ -31,5 +31,11 @@ dependencies {
 
     // region Api
     implementation(project(":api"))
+    implementation(project(":api-imp"))
+    // endregion
+
+    // region Network
+    implementation(Network.moshi)
+    implementation(Network.moshiKotlin)
     // endregion
 }

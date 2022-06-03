@@ -35,7 +35,7 @@ object Versions {
     const val customactivityoncrashVersion = "2.3.0"
 
     //network
-    const val gsonVersion = "2.9.0"
+    const val moshiVersion = "1.13.0"
 
     //annotation
     const val annotationVersion = "1.3.0"
