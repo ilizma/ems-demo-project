@@ -3,11 +3,10 @@ package com.ilizma.api.extension
 import android.content.Context
 import java.io.IOException
 
-fun getJsonStringFromAsset(
-    context: Context,
+fun Context.getJsonStringFromAsset(
     fileName: String,
 ): String = try {
-    context.assets
+    assets
         .open(fileName)
         .bufferedReader()
         .use { it.readText() }

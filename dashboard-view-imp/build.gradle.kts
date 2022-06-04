@@ -14,6 +14,11 @@ android {
         testInstrumentationRunner = ConfigData.testInstrumentationRunner
     }
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
     sourceSets {
         getByName("main").java.srcDirs("src/main/kotlin")
         getByName("test").java.srcDirs("src/test/kotlin")
@@ -41,5 +46,6 @@ dependencies {
 
     // region Dashboard
     implementation(project(":dashboard-view"))
+    implementation(project(":dashboard-presentation"))
     // endregion
 }

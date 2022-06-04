@@ -43,7 +43,10 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
         })
     }
 
-    override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
+    override fun getValue(
+        thisRef: Fragment,
+        property: KProperty<*>
+    ): T {
         val binding = binding
         if (binding != null) return binding
 
@@ -59,4 +62,7 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
 
 fun <T : ViewBinding> Fragment.viewBinding(
     viewBindingFactory: (View) -> T,
-): FragmentViewBindingDelegate<T> = FragmentViewBindingDelegate(this, viewBindingFactory)
+): FragmentViewBindingDelegate<T> = FragmentViewBindingDelegate(
+    fragment = this,
+    viewBindingFactory = viewBindingFactory
+)

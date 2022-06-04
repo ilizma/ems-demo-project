@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 buildscript {
     repositories {
         google()
@@ -9,10 +11,12 @@ buildscript {
         classpath(Project.kotlinGradle)
         classpath(Project.navigation)
         classpath(Project.hilt)
+        classpath(Project.junit)
     }
 }
 
 allprojects {
+    setDefaultKotlinJvmTarget(tasks)
     repositories {
         maven {
             setUrl("https://maven.google.com/")
@@ -20,6 +24,14 @@ allprojects {
         }
         jcenter()
         maven(url = "https://jitpack.io")
+    }
+}
+
+fun setDefaultKotlinJvmTarget(tasks: TaskContainer) {
+    tasks.withType<KotlinCompile>().all {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
     }
 }
 

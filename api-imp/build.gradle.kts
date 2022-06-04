@@ -11,6 +11,20 @@ android {
         targetSdk = ConfigData.targetSdk
     }
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    sourceSets {
+        getByName("main").java.srcDirs("src/main/kotlin")
+        getByName("test").java.srcDirs("src/test/kotlin")
+    }
+
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
+
 }
 
 dependencies {
@@ -20,6 +34,12 @@ dependencies {
 
     // region Network
     implementation(Network.moshi)
+    // endregion
+
+    // region Test
+    testImplementation(Test.mockk)
+    testImplementation(Test.junitApi)
+    testRuntimeOnly(Test.junitEngine)
     // endregion
 
     // region Api

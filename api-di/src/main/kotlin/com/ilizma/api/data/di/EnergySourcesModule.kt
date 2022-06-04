@@ -1,8 +1,8 @@
 package com.ilizma.api.data.di
 
 import android.content.Context
-import com.ilizma.api.data.EnergySources
-import com.ilizma.api.data.EnergySourcesImp
+import com.ilizma.api.data.EnergySourcesApi
+import com.ilizma.api.data.EnergySourcesApiImp
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
@@ -12,13 +12,13 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 
 @Module
 @InstallIn(FragmentComponent::class)
-class EnergySourcesModule {
+object EnergySourcesModule {
 
     @Provides
     fun provideEnergySources(
         @ApplicationContext context: Context,
         moshi: Moshi,
-    ): EnergySources = EnergySourcesImp(
+    ): EnergySourcesApi = EnergySourcesApiImp(
         context,
         moshi,
     )

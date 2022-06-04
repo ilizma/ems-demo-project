@@ -15,6 +15,11 @@ android {
         isEnabled = true
     }
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
     sourceSets {
         getByName("main").java.srcDirs("src/main/kotlin")
     }

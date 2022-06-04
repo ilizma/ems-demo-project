@@ -1,12 +1,12 @@
 include(
-    // di
-    ":di-base",
-
     // View
     ":view-base",
 
     // Presentation
     ":presentation-base",
+
+    // Test
+    ":test-base",
 
     // resources
     ":resources",
@@ -34,6 +34,12 @@ include(
     ":dashboard-di",
     ":dashboard-view",
     ":dashboard-view-imp",
+    ":dashboard-presentation",
+    ":dashboard-presentation-imp",
+    ":dashboard-domain",
+    ":dashboard-domain-imp",
+    ":dashboard-data",
+    ":dashboard-data-imp",
     // endregion
 
 )

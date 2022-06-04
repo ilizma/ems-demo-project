@@ -4,6 +4,7 @@ object Project {
     val navigation by lazy { "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigationVersion}" }
     val kotlin by lazy { "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlinVersion}" }
     val hilt by lazy { "com.google.dagger:hilt-android-gradle-plugin:${Versions.hiltVersion}" }
+    val junit by lazy { "de.mannodermaus.gradle.plugins:android-junit5:${Versions.junitVersion}" }
 }
 
 object Rx {
@@ -61,9 +62,6 @@ object Annotation {
 
 object Test {
     val mockk by lazy { "io.mockk:mockk:${Versions.mockkVersion}" }
-    val junit by lazy { "junit:junit:${Versions.junitVersion}" }
-    val runner by lazy { "androidx.test:runner:${Versions.supportTestVersion}" }
-    val rules by lazy { "androidx.test:rules:${Versions.supportTestVersion}" }
-    val core by lazy { "androidx.test:core:${Versions.testCoreVersion}" }
-    val extJunit by lazy { "androidx.test.ext:junit:${Versions.testExtJunitVersion}" }
+    val junitApi by lazy { "org.junit.jupiter:junit-jupiter-api:${Versions.junitJupiterVersion}" }
+    val junitEngine by lazy { "org.junit.jupiter:junit-jupiter-engine:${Versions.junitJupiterVersion}" }
 }

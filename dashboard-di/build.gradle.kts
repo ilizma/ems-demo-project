@@ -13,6 +13,11 @@ android {
         targetSdk = ConfigData.targetSdk
     }
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+
     sourceSets {
         getByName("main").java.srcDirs("src/main/kotlin")
     }
@@ -30,12 +35,21 @@ dependencies {
     // endregion
 
     // region Base
-    implementation(project(":di-base"))
     implementation(project(":presentation-base"))
+    // endregion
+
+    // region Api
+    implementation(project(":api"))
     // endregion
 
     // region Menu
     implementation(project(":dashboard-view"))
     implementation(project(":dashboard-view-imp"))
+    implementation(project(":dashboard-presentation"))
+    implementation(project(":dashboard-presentation-imp"))
+    implementation(project(":dashboard-domain"))
+    implementation(project(":dashboard-domain-imp"))
+    implementation(project(":dashboard-data"))
+    implementation(project(":dashboard-data-imp"))
     // endregion
 }

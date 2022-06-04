@@ -3,6 +3,7 @@ object Versions {
     const val buildGradleVersion = "7.2.1"
     const val kotlinVersion = "1.6.21"
     const val hiltVersion = "2.40.5"
+    const val junitVersion = "1.8.2.0"
 
     //rx
     const val rxKotlinVersion = "3.0.1"
@@ -42,8 +43,5 @@ object Versions {
 
     //test
     const val mockkVersion = "1.12.4"
-    const val junitVersion = "4.13.2"
-    const val supportTestVersion = "1.4.0"
-    const val testCoreVersion = "1.4.0"
-    const val testExtJunitVersion = "1.1.3"
+    const val junitJupiterVersion = "5.8.2"
 }
