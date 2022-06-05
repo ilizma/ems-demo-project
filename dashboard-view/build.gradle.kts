@@ -38,6 +38,7 @@ dependencies {
     implementation(Android.appcompat)
     implementation(AndroidUI.constraintLayout)
     implementation(AndroidUI.material)
+    implementation(AndroidUI.recyclerview)
     // endregion
 
     // region Resources
@@ -46,5 +47,9 @@ dependencies {
 
     // region Base
     implementation(project(":view-base"))
+    // endregion
+
+    // region Dashboard
+    implementation(project(":dashboard-presentation"))
     // endregion
 }

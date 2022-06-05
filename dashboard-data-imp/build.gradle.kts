@@ -13,6 +13,10 @@ dependencies {
     implementation(Rx.java)
     // endregion
 
+    // region Kotlin
+    implementation(Kotlin.datetime)
+    // endregion
+
     // region Test
     testImplementation(Test.mockk)
     testImplementation(Test.junitApi)

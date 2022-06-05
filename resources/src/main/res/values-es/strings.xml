@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="crash_activity_message">Ha ocurrido un error inesperado. Sentimos los inconvenientes ocasionados.</string>
     <string name="crash_activity_restart_button">REINICIAR APP</string>

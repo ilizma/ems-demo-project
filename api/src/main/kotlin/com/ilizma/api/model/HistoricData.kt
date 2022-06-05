@@ -11,5 +11,5 @@ data class HistoricData(
     val pvActivePower: Double,
     @Json(name = "quasars_active_power")
     val quasarsActivePower: Double,
-    val timestamp: String
+    val timestamp: String,
 )

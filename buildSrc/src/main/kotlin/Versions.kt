@@ -13,6 +13,9 @@ object Versions {
     //Fragment
     const val fragmentKtxVersion = "1.4.0"
 
+    //kotlin
+    const val datetimeVersion = "0.3.3"
+
     //android
     const val supportVersion = "1.4.0"
     const val legacyVersion = "1.0.0"

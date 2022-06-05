@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name" translatable="false">EMS Demo</string>
 
@@ -13,5 +14,9 @@
     <string name="retry">Retry</string>
     <string name="empty_list">Empty list</string>
     <string name="menu_dashboard_title">Dashboard</string>
+    <string name="building_active_power" translatable="false">Building active power:</string>
+    <string name="grid_active_power" translatable="false">Grid active power:</string>
+    <string name="pv_active_power" translatable="false">Pv active power:</string>
+    <string name="quasars_active_power" translatable="false">Quasars active power:</string>
 
 </resources>

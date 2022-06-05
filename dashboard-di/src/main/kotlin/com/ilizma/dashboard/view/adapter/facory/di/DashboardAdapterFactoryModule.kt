@@ -1,12 +1,13 @@
-package com.ilizma.dashboard.view.bind.di
+package com.ilizma.dashboard.view.adapter.facory.di
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.ilizma.dashboard.presentation.viewmodel.factory.di.DASHBOARD_SCREEN_VIEW_MODEL_PROVIDER_NAMED
 import com.ilizma.dashboard.view.adapter.factory.DashboardAdapterFactory
-import com.ilizma.dashboard.view.bind.DashboardScreenFragmentBinder
-import com.ilizma.dashboard.view.bind.DashboardScreenFragmentBinderImp
+import com.ilizma.dashboard.view.adapter.util.WidgetDiffUtil
+import com.ilizma.dashboard.view.bind.factory.WidgetBinderFactory
+import com.ilizma.dashboard.view.viewholder.factory.WidgetViewHolderFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,17 +16,20 @@ import javax.inject.Named
 
 @Module
 @InstallIn(FragmentComponent::class)
-object DashboardScreenFragmentBinderModule {
+object DashboardAdapterFactoryModule {
 
     @Provides
-    fun provideDashboardScreenFragmentBinder(
+    fun provideDashboardAdapterFactory(
         fragment: Fragment,
-        adapterFactory: DashboardAdapterFactory,
+        binderFactory: WidgetBinderFactory,
+        diffUtil: WidgetDiffUtil,
+        viewHolderFactory: WidgetViewHolderFactory,
         @Named(DASHBOARD_SCREEN_VIEW_MODEL_PROVIDER_NAMED) viewModelProviderFactory: ViewModelProvider.Factory,
-    ): DashboardScreenFragmentBinder = DashboardScreenFragmentBinderImp(
+    ): DashboardAdapterFactory = DashboardAdapterFactory(
+        binderFactory = binderFactory,
+        diffUtil = diffUtil,
+        viewHolderFactory = viewHolderFactory,
         viewModelLazy = fragment.viewModels { viewModelProviderFactory },
-        lifecycleOwner = { fragment.viewLifecycleOwner },
-        adapterFactory = adapterFactory,
     )
 
 }

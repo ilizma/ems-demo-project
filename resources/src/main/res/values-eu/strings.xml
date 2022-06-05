@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="crash_activity_message">Ustekabeko errore bat gertatu da. Sortutako eragozpenak sentitzen ditugu.</string>
     <string name="crash_activity_restart_button">APP-A BERRABIARAZI</string>

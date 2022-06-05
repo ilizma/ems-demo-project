@@ -13,6 +13,10 @@ object Rx {
     val binding by lazy { "com.jakewharton.rxbinding4:rxbinding:${Versions.rxBindingVersion}" }
 }
 
+object Kotlin {
+    val datetime by lazy { "org.jetbrains.kotlinx:kotlinx-datetime:${Versions.datetimeVersion}" }
+}
+
 object Android {
     val appcompat by lazy { "androidx.appcompat:appcompat:${Versions.supportVersion}" }
     val v4 by lazy { "androidx.legacy:legacy-support-v4:${Versions.legacyVersion}" }

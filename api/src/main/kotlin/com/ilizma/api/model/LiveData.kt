@@ -16,5 +16,5 @@ data class LiveData(
     @Json(name = "system_soc")
     val systemSoc: Double,
     @Json(name = "total_energy")
-    val totalEnergy: Int
+    val totalEnergy: Int,
 )

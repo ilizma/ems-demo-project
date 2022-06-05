@@ -3,16 +3,18 @@ package com.ilizma.dashboard.view.bind
 import androidx.lifecycle.LifecycleOwner
 import com.ilizma.dashboard.presentation.model.DashboardState
 import com.ilizma.dashboard.presentation.viewmodel.DashboardScreenViewModel
+import com.ilizma.dashboard.view.adapter.DashboardAdapter
+import com.ilizma.dashboard.view.adapter.factory.DashboardAdapterFactory
 import com.ilizma.dashboard.view.databinding.DashboardScreenFragmentBinding
 
 class DashboardScreenFragmentBinderImp(
     viewModelLazy: Lazy<DashboardScreenViewModel>,
     private val lifecycleOwner: () -> LifecycleOwner,
-    //adapterFactory: DaysAdapterFactory,
+    adapterFactory: DashboardAdapterFactory,
 ) : DashboardScreenFragmentBinder {
 
     private val viewModel by viewModelLazy
-    //private val adapter: DaysAdapter by lazy { adapterFactory.create() }
+    private val adapter: DashboardAdapter by lazy { adapterFactory.create() }
     private lateinit var binding: DashboardScreenFragmentBinding
 
     override fun bind(binding: DashboardScreenFragmentBinding) {
@@ -22,7 +24,7 @@ class DashboardScreenFragmentBinderImp(
     }
 
     private fun initRecyclerView() {
-        //binding.scheduleScreenFragmentRv.adapter = adapter
+        binding.dashboardScreenFragmentRv.adapter = adapter
     }
 
     private fun setupObservers() {
@@ -34,7 +36,7 @@ class DashboardScreenFragmentBinderImp(
     private fun onDashboardState(
         success: DashboardState.Success,
     ) {
-        //adapter.submitList(success.historicData)
+        adapter.submitList(success.historicData)
     }
 
 }

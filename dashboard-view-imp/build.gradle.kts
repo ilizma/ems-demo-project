@@ -36,6 +36,11 @@ dependencies {
     implementation(Rx.java)
     // endregion
 
+    // region Android
+    implementation(AndroidUI.material)
+    implementation(AndroidUI.recyclerview)
+    // endregion
+
     // region Base
     implementation(project(":view-base"))
     // endregion

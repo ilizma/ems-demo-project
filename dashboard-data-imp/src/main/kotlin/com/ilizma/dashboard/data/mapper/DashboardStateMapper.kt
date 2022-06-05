@@ -1,8 +1,8 @@
 package com.ilizma.dashboard.data.mapper
 
 import com.ilizma.dashboard.domain.model.DashboardState
-import com.ilizma.dashboard.data.model.DashboardState as DataDashboardState
 import com.ilizma.api.model.HistoricData as ApiHistoricData
+import com.ilizma.dashboard.data.model.DashboardState as DataDashboardState
 
 class DashboardStateMapper(
     private val mapper: HistoricDataMapper,
@@ -11,7 +11,7 @@ class DashboardStateMapper(
     fun from(
         data: List<ApiHistoricData>,
     ): DataDashboardState = DataDashboardState.Success(
-        data.map { mapper.from(it) }
+        data.mapIndexed { index, historicData -> mapper.from(index.toString(), historicData) }
     )
 
     fun from(

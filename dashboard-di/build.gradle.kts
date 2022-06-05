@@ -31,6 +31,10 @@ dependencies {
     // endregion
 
     // region Android
+    implementation(Android.appcompat)
+    implementation(AndroidUI.constraintLayout)
+    implementation(AndroidUI.material)
+    implementation(AndroidUI.recyclerview)
     implementation(AndroidKtx.fragment)
     // endregion
 
