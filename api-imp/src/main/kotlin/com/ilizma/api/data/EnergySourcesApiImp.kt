@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 
 private const val HISTORIC_DATA_JSON_FILE_NAME = "historic_data.json"
 private const val LIVE_DATA_JSON_FILE_NAME = "live_data.json"
-private const val NET_SIMULATOR_DELAY_IN_SECONDS = 3L
+private const val NET_SIMULATOR_DELAY_IN_SECONDS = 1L
 
 class EnergySourcesApiImp(
     private val context: Context,
@@ -22,14 +22,14 @@ class EnergySourcesApiImp(
     override fun getHistoricDataList(
     ): Single<List<HistoricData>> = context.getJsonStringFromAsset(HISTORIC_DATA_JSON_FILE_NAME)
         .let { moshi.adapter<List<HistoricData>>().fromJson(it) }
-        ?.let { Single.just(it).delay(NET_SIMULATOR_DELAY_IN_SECONDS, TimeUnit.SECONDS) }
+        ?.let { Single.just(it) }
         ?: throw IllegalArgumentException("Malformed $HISTORIC_DATA_JSON_FILE_NAME")
 
     @OptIn(ExperimentalStdlibApi::class)
     override fun getLiveData(
     ): Single<LiveData> = context.getJsonStringFromAsset(LIVE_DATA_JSON_FILE_NAME)
         .let { moshi.adapter<LiveData>().fromJson(it) }
-        ?.let { Single.just(it) }
+        ?.let { Single.just(it).delay(NET_SIMULATOR_DELAY_IN_SECONDS, TimeUnit.SECONDS) }
         ?: throw IllegalArgumentException("Malformed $LIVE_DATA_JSON_FILE_NAME")
 
 }

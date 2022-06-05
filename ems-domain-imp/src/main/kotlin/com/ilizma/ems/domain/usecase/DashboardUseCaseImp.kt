@@ -9,6 +9,6 @@ class DashboardUseCaseImp(
 ) : DashboardUseCase {
 
     override fun invoke(
-    ): Single<DashboardState> = repository.get()
+    ): Single<DashboardState> = repository.getDashboardState()
 
 }

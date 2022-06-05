@@ -9,7 +9,7 @@
         android:name="com.ilizma.ems.view.fragment.DashboardScreenFragment"
         tools:layout="@layout/dashboard_screen_fragment">
 
-       <action
+        <action
             android:id="@+id/go_from_dashboard_to_chart"
             app:destination="@id/chart_screen" />
     </fragment>
@@ -17,11 +17,6 @@
     <fragment
         android:id="@+id/chart_screen"
         android:name="com.ilizma.ems.view.fragment.ChartScreenFragment"
-        tools:layout="@layout/chart_screen_fragment">
-
-        <argument
-            android:name="id"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/chart_screen_fragment" />
 
 </navigation>

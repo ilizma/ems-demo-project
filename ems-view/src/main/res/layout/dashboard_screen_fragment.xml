@@ -19,11 +19,191 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/dashboard_screen_fragment_rv"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/widget" />
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dashboard_screen_widget_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/horizontal_margin"
+                    android:layout_marginVertical="@dimen/vertical_margin"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quasar_charger_discharged"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dashboard_screen_tv_quasar_charger_discharged"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="960" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dashboard_screen_widget_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/horizontal_margin"
+                    android:layout_marginVertical="@dimen/vertical_margin"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quasar_charger_charged"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dashboard_screen_tv_quasar_charger_charged"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="464.0" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dashboard_screen_widget_margin">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/horizontal_margin"
+                    android:layout_marginVertical="@dimen/vertical_margin"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dashboard_screen_tv_solar_power_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/solar_power"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dashboard_screen_tv_solar_power"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dashboard_screen_widget_text_margin_start"
+                        app:layout_constraintStart_toEndOf="@+id/dashboard_screen_tv_solar_power_title"
+                        app:layout_constraintTop_toTopOf="@+id/dashboard_screen_tv_solar_power_title"
+                        tools:text="7.827" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dashboard_screen_tv_quasars_power_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/quasars_power"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/dashboard_screen_tv_solar_power_title" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dashboard_screen_tv_quasars_power"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dashboard_screen_widget_text_margin_start"
+                        app:layout_constraintStart_toEndOf="@+id/dashboard_screen_tv_quasars_power_title"
+                        app:layout_constraintTop_toTopOf="@+id/dashboard_screen_tv_quasars_power_title"
+                        tools:text="-38.732" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dashboard_screen_tv_grid_power_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/grid_power"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/dashboard_screen_tv_quasars_power_title" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dashboard_screen_tv_grid_power"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dashboard_screen_widget_text_margin_start"
+                        app:layout_constraintStart_toEndOf="@+id/dashboard_screen_tv_grid_power_title"
+                        app:layout_constraintTop_toTopOf="@+id/dashboard_screen_tv_grid_power_title"
+                        tools:text="80.475" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dashboard_screen_tv_building_demand_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/building_demand"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/dashboard_screen_tv_grid_power_title" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dashboard_screen_tv_building_demand"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dashboard_screen_widget_text_margin_start"
+                        app:layout_constraintStart_toEndOf="@+id/building_demand_title"
+                        app:layout_constraintTop_toTopOf="@+id/dashboard_screen_tv_building_demand_title"
+                        tools:text="127.03399999999999" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/dashboard_screen_cv_statistics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dashboard_screen_widget_margin"
+                android:background="?attr/selectableItemBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/horizontal_margin"
+                    android:layout_marginVertical="@dimen/vertical_margin"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/statistics"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/dashboard_screen_tv_statistics"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="464.0" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

@@ -2,7 +2,10 @@ package com.ilizma.ems.data.datasource
 
 import com.ilizma.api.data.EnergySourcesApi
 import com.ilizma.api.model.HistoricData
+import com.ilizma.api.model.LiveData
+import com.ilizma.ems.data.mapper.ChartStateMapper
 import com.ilizma.ems.data.mapper.DashboardStateMapper
+import com.ilizma.ems.data.model.ChartState
 import com.ilizma.ems.data.model.DashboardState
 import io.mockk.MockKAnnotations
 import io.mockk.every
@@ -20,7 +23,10 @@ internal class EmsDataSourceImpTest {
     private lateinit var api: EnergySourcesApi
 
     @RelaxedMockK
-    private lateinit var mapper: DashboardStateMapper
+    private lateinit var dashboardMapper: DashboardStateMapper
+
+    @RelaxedMockK
+    private lateinit var chartMapper: ChartStateMapper
 
     private lateinit var dataSource: EmsDataSource
 
@@ -32,23 +38,46 @@ internal class EmsDataSourceImpTest {
     fun setup() {
         dataSource = EmsDataSourceImp(
             api = api,
-            mapper = mapper,
+            dashboardMapper = dashboardMapper,
+            chartMapper = chartMapper,
         )
     }
 
     @Nested
-    inner class Get {
+    inner class GetDashboardState {
 
         @Test
-        fun `given HistoricData list, when get is called, then result should be the expected`() {
+        fun `given LiveData, when getDashboardState is called, then result should be the expected`() {
             // given
-            val historicDataList = mockk<List<HistoricData>>()
+            val liveData = mockk<LiveData>()
             val expected = mockk<DashboardState>()
-            every { api.getHistoricDataList() } returns Single.just(historicDataList)
-            every { mapper.from(historicDataList) } returns expected
+            every { api.getLiveData() } returns Single.just(liveData)
+            every { dashboardMapper.from(liveData) } returns expected
 
             // when
-            val resultObserver = dataSource.get()
+            val resultObserver = dataSource.getDashboardState()
+                .observeOn(Schedulers.trampoline())
+                .test()
+
+            // then
+            resultObserver.assertValue { it == expected }
+        }
+
+    }
+
+    @Nested
+    inner class GetChartState {
+
+        @Test
+        fun `given HistoricData list, when getChartState is called, then result should be the expected`() {
+            // given
+            val historicDataList = mockk<List<HistoricData>>()
+            val expected = mockk<ChartState>()
+            every { api.getHistoricDataList() } returns Single.just(historicDataList)
+            every { chartMapper.from(historicDataList) } returns expected
+
+            // when
+            val resultObserver = dataSource.getChartState()
                 .observeOn(Schedulers.trampoline())
                 .test()
 

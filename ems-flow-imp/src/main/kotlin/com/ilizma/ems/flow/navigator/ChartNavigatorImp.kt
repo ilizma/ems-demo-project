@@ -7,8 +7,8 @@ class ChartNavigatorImp(
     private val navController: NavController,
 ) : ChartNavigator {
 
-    override fun navigate(id: String) {
-        DashboardScreenFragmentDirections.goFromDashboardToChart(id)
+    override fun navigate() {
+        DashboardScreenFragmentDirections.goFromDashboardToChart()
             .let { navController.navigate(it) }
     }
 

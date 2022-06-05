@@ -8,7 +8,7 @@ import com.ilizma.ems.presentation.mapper.DashboardStateMapper
 import com.ilizma.ems.presentation.model.DashboardScreenNavigationAction
 import com.ilizma.ems.presentation.model.DashboardScreenNavigationAction.Back
 import com.ilizma.ems.presentation.model.DashboardScreenNavigationAction.Detail
-import com.ilizma.ems.presentation.viewmodel.factory.ERROR_ASSISTED
+import com.ilizma.ems.presentation.viewmodel.factory.const.ERROR_ASSISTED
 import com.ilizma.presentation.SingleLiveEvent
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
@@ -27,7 +27,7 @@ class DashboardScreenViewModelImp @AssistedInject constructor(
     @Assisted private val _navigationAction: SingleLiveEvent<DashboardScreenNavigationAction>,
 ) : DashboardScreenViewModel() {
 
-    override val dashboardState: LiveData<PresentationDashboardState.Success> = _dashboardState
+    override val dashboard: LiveData<PresentationDashboardState.Success> = _dashboardState
     override val error: LiveData<String> = _error
     override val navigationAction: LiveData<DashboardScreenNavigationAction> = _navigationAction
 
@@ -39,9 +39,8 @@ class DashboardScreenViewModelImp @AssistedInject constructor(
             .addTo(compositeDisposable)
     }
 
-    override fun onClick(id: String) {
-        Detail(id)
-            .let { _navigationAction.postValue(it) }
+    override fun openDetail() {
+        _navigationAction.postValue(Detail)
     }
 
     override fun onBack() {
@@ -51,7 +50,7 @@ class DashboardScreenViewModelImp @AssistedInject constructor(
     private fun onDashboardState(
         state: DashboardState,
     ) {
-        when(state){
+        when (state) {
             is DashboardState.Error -> _error.postValue(state.message)
             is DashboardState.Success -> mapper.from(state)
                 .let { _dashboardState.postValue(it) }

@@ -8,4 +8,4 @@ fun String.getFormattedDate(
 ): String = toInstant()
     .toLocalDateTime(TimeZone.currentSystemDefault())
     .toString()
-    .replace("T", " ")
+    .replace(oldValue = "T", newValue = " ")

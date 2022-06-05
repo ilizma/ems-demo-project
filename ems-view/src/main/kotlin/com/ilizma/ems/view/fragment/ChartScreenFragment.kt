@@ -1,13 +1,20 @@
 package com.ilizma.ems.view.fragment
 
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import com.ilizma.ems.view.R
+import com.ilizma.ems.view.bind.ChartScreenFragmentBinder
+import com.ilizma.ems.view.databinding.ChartScreenFragmentBinding
+import com.ilizma.ems.view.router.ChartScreenRouter
+import com.ilizma.view.binding.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ChartScreenFragment : Fragment(R.layout.chart_screen_fragment) {
 
-    /*@Inject
+    @Inject
     internal lateinit var binder: ChartScreenFragmentBinder
 
     @Inject
@@ -19,6 +26,6 @@ class ChartScreenFragment : Fragment(R.layout.chart_screen_fragment) {
         super.onViewCreated(view, savedInstanceState)
         router.init()
         binder.bind(binding)
-    }*/
+    }
 
 }

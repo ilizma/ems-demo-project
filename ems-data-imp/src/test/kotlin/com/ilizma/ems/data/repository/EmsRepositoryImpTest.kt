@@ -1,10 +1,12 @@
 package com.ilizma.ems.data.repository
 
+import com.ilizma.ems.data.cache.ChartCache
 import com.ilizma.ems.data.cache.DashboardCache
 import com.ilizma.ems.data.datasource.EmsDataSource
+import com.ilizma.ems.data.mapper.ChartStateMapper
 import com.ilizma.ems.data.mapper.DashboardStateMapper
+import com.ilizma.ems.domain.model.ChartState
 import com.ilizma.ems.domain.model.DashboardState
-import com.ilizma.ems.data.model.DashboardState as DataDashboardState
 import com.ilizma.ems.domain.repository.EmsRepository
 import io.mockk.MockKAnnotations
 import io.mockk.every
@@ -17,6 +19,8 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
+import com.ilizma.ems.data.model.ChartState as DataChartState
+import com.ilizma.ems.data.model.DashboardState as DataDashboardState
 
 class EmsRepositoryImpTest {
 
@@ -24,10 +28,16 @@ class EmsRepositoryImpTest {
     private lateinit var dataSource: EmsDataSource
 
     @RelaxedMockK
-    private lateinit var cache: DashboardCache
+    private lateinit var dashboardCache: DashboardCache
 
     @RelaxedMockK
-    private lateinit var mapper: DashboardStateMapper
+    private lateinit var chartCache: ChartCache
+
+    @RelaxedMockK
+    private lateinit var dashboardStateMapper: DashboardStateMapper
+
+    @RelaxedMockK
+    private lateinit var chartStateMapper: ChartStateMapper
 
     private lateinit var repository: EmsRepository
 
@@ -39,48 +49,92 @@ class EmsRepositoryImpTest {
     fun setup() {
         repository = EmsRepositoryImp(
             dataSource = dataSource,
-            cache = cache,
-            mapper = mapper,
+            dashboardCache = dashboardCache,
+            chartCache = chartCache,
+            dashboardStateMapper = dashboardStateMapper,
+            chartStateMapper = chartStateMapper,
         )
     }
 
     @Nested
-    inner class Get {
+    inner class GetDashboardState {
 
         @Test
-        fun `given null cache, when get is called, then result should be the expected`() {
+        fun `given null dashboardCache, when getDashboardState is called, then result should be the expected`() {
             // given
             val dataDashboardState = mockk<DataDashboardState>()
             val expected = mockk<DashboardState>()
-            every { cache.cache } returns null
-            every { dataSource.get() } returns Single.just(dataDashboardState)
-            every { mapper.from(dataDashboardState) } returns expected
+            every { dashboardCache.cache } returns null
+            every { dataSource.getDashboardState() } returns Single.just(dataDashboardState)
+            every { dashboardStateMapper.from(dataDashboardState) } returns expected
 
             // when
-            val resultObserver = repository.get()
+            val resultObserver = repository.getDashboardState()
                 .observeOn(Schedulers.trampoline())
                 .test()
 
             // then
-            assertEquals(cache.cache, expected)
+            assertEquals(dashboardCache.cache, expected)
             resultObserver.assertValue { it == expected }
         }
 
         @Test
-        fun `given a cache, when get is called, then result should be the expected`() {
+        fun `given a dashboardCache, when getDashboardState is called, then result should be the expected`() {
             // given
             val dataDashboardState = mockk<DataDashboardState>()
             val expected = mockk<DashboardState>()
-            every { cache.cache } returns dataDashboardState
-            every { mapper.from(dataDashboardState) } returns expected
+            every { dashboardCache.cache } returns dataDashboardState
+            every { dashboardStateMapper.from(dataDashboardState) } returns expected
 
             // when
-            val resultObserver = repository.get()
+            val resultObserver = repository.getDashboardState()
                 .observeOn(Schedulers.trampoline())
                 .test()
 
             // then
-            verify(exactly = 0) { dataSource.get() }
+            verify(exactly = 0) { dataSource.getDashboardState() }
+            resultObserver.assertValue { it == expected }
+        }
+
+    }
+
+    @Nested
+    inner class GetChartState {
+
+        @Test
+        fun `given null dashboardCache, when getChartState is called, then result should be the expected`() {
+            // given
+            val dataChartState = mockk<DataChartState>()
+            val expected = mockk<ChartState>()
+            every { chartCache.cache } returns null
+            every { dataSource.getChartState() } returns Single.just(dataChartState)
+            every { chartStateMapper.from(dataChartState) } returns expected
+
+            // when
+            val resultObserver = repository.getChartState()
+                .observeOn(Schedulers.trampoline())
+                .test()
+
+            // then
+            assertEquals(chartCache.cache, expected)
+            resultObserver.assertValue { it == expected }
+        }
+
+        @Test
+        fun `given a dashboardCache, when getChartState is called, then result should be the expected`() {
+            // given
+            val dataChartState = mockk<DataChartState>()
+            val expected = mockk<ChartState>()
+            every { chartCache.cache } returns dataChartState
+            every { chartStateMapper.from(dataChartState) } returns expected
+
+            // when
+            val resultObserver = repository.getChartState()
+                .observeOn(Schedulers.trampoline())
+                .test()
+
+            // then
+            verify(exactly = 0) { dataSource.getChartState() }
             resultObserver.assertValue { it == expected }
         }
 

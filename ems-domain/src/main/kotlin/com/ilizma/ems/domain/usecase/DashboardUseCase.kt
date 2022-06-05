@@ -5,6 +5,6 @@ import io.reactivex.rxjava3.core.Single
 
 interface DashboardUseCase {
 
-    operator fun invoke() : Single<DashboardState>
+    operator fun invoke(): Single<DashboardState>
 
 }

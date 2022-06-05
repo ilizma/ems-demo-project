@@ -8,10 +8,8 @@ import com.ilizma.ems.data.model.HistoricData as DataHistoricData
 class HistoricDataMapper {
 
     fun from(
-        id: String,
         data: ApiHistoricData,
     ): DataHistoricData = DataHistoricData(
-        id = id,
         buildingActivePower = data.buildingActivePower,
         gridActivePower = data.gridActivePower,
         pvActivePower = data.pvActivePower,
@@ -22,7 +20,6 @@ class HistoricDataMapper {
     fun from(
         data: DataHistoricData,
     ): HistoricData = HistoricData(
-        id = data.id,
         buildingActivePower = data.buildingActivePower,
         gridActivePower = data.gridActivePower,
         pvActivePower = data.pvActivePower,

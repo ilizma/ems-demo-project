@@ -22,14 +22,14 @@ object DashboardScreenRouterModule {
     @Provides
     fun provideDashboardScreenRouter(
         fragment: Fragment,
-        dashboardScreenBackCloseNavigator: DashboardScreenBackCloseNavigator,
+        backCloseNavigator: DashboardScreenBackCloseNavigator,
         chartNavigator: ChartNavigator,
         @Named(DASHBOARD_SCREEN_VIEW_MODEL_PROVIDER_NAMED) viewModelProviderFactory: ViewModelProvider.Factory,
     ): DashboardScreenRouter = DashboardScreenRouterImp(
         lifecycleOwner = { fragment.viewLifecycleOwner },
         onBackPressedDispatcher = OnBackPressedDispatcher(),
         viewModelLazy = fragment.viewModels { viewModelProviderFactory },
-        dashboardScreenBackCloseNavigator = dashboardScreenBackCloseNavigator,
+        backCloseNavigator = backCloseNavigator,
         chartNavigator = chartNavigator,
     )
 

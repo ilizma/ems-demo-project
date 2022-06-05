@@ -32,7 +32,7 @@ object Versions {
     const val lottieVersion = "4.2.1"
 
     //android architecture component
-    const val navigationVersion = "2.4.1"
+    const val navigationVersion = "2.4.2"
     const val lifecycleVersion = "2.4.0"
 
     //customactivityoncrash

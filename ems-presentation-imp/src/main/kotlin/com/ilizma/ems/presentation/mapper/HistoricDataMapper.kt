@@ -8,12 +8,11 @@ class HistoricDataMapper {
     fun from(
         data: HistoricData,
     ): PresentationHistoricData = PresentationHistoricData(
-        id = data.id,
         buildingActivePower = data.buildingActivePower,
         gridActivePower = data.gridActivePower,
         pvActivePower = data.pvActivePower,
         quasarsActivePower = data.quasarsActivePower,
         date = data.date
     )
-    
+
 }

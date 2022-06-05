@@ -37,10 +37,10 @@ internal class DashboardUseCaseImpTest {
         fun `given expected DashboardState, when invoked, then result should be the expected`() {
             // given
             val expected = mockk<DashboardState>()
-            every { repository.get() } returns Single.just(expected)
+            every { repository.getDashboardState() } returns Single.just(expected)
 
             // when
-            val resultObserver = repository.get()
+            val resultObserver = repository.getDashboardState()
                 .observeOn(Schedulers.trampoline())
                 .test()
 

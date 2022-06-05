@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import com.ilizma.ems.domain.model.DashboardState
 import com.ilizma.ems.domain.usecase.DashboardUseCase
 import com.ilizma.ems.presentation.mapper.DashboardStateMapper
+import com.ilizma.ems.presentation.model.DashboardScreenNavigationAction.Back
+import com.ilizma.ems.presentation.model.DashboardScreenNavigationAction.Detail
 import com.ilizma.presentation.SingleLiveEvent
 import com.ilizma.test.executor.InstantExecutorExtension
 import io.mockk.MockKAnnotations
@@ -47,6 +49,7 @@ internal class DashboardScreenViewModelImpTest {
             backgroundScheduler = backgroundScheduler,
             compositeDisposable = compositeDisposable,
             _dashboardState = MutableLiveData(),
+            _error = MutableLiveData(),
             _navigationAction = SingleLiveEvent(),
         )
     }
@@ -66,22 +69,58 @@ internal class DashboardScreenViewModelImpTest {
             initViewModel()
 
             // then
-            assertEquals(expected, viewModel.dashboardState.value)
+            assertEquals(expected, viewModel.dashboard.value)
         }
 
         @Test
         fun `given a Error DashboardState, when init is executed, then the liveData value should be the expected`() {
             // given
+            val expected = "errorMessage"
             val state = mockk<DashboardState.Error>()
-            val expected = mockk<PresentationDashboardState.Error>()
             every { useCase() } returns Single.just(state)
-            every { mapper.from(state) } returns expected
+            every { state.message } returns expected
 
             // when
             initViewModel()
 
             // then
-            assertEquals(expected, viewModel.dashboardState.value)
+            assertEquals(expected, viewModel.error.value)
+        }
+
+    }
+
+    @Nested
+    inner class OpenDetail {
+
+        @Test
+        fun `given initialized viewModel, when openDetail is executed, then the liveData value should be the expected`() {
+            // given
+            val expected = Detail
+            initViewModel()
+
+            // when
+            viewModel.openDetail()
+
+            // then
+            assertEquals(expected, viewModel.navigationAction.value)
+        }
+
+    }
+
+    @Nested
+    inner class OnBack {
+
+        @Test
+        fun `given initialized viewModel, when onBack is executed, then the liveData value should be the expected`() {
+            // given
+            val expected = Back
+            initViewModel()
+
+            // when
+            viewModel.onBack()
+
+            // then
+            assertEquals(expected, viewModel.navigationAction.value)
         }
 
     }

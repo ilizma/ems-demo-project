@@ -1,7 +1,9 @@
 package com.ilizma.ems.data.repository.di
 
+import com.ilizma.ems.data.cache.ChartCache
 import com.ilizma.ems.data.cache.DashboardCache
 import com.ilizma.ems.data.datasource.EmsDataSource
+import com.ilizma.ems.data.mapper.ChartStateMapper
 import com.ilizma.ems.data.mapper.DashboardStateMapper
 import com.ilizma.ems.data.mapper.HistoricDataMapper
 import com.ilizma.ems.data.repository.EmsRepositoryImp
@@ -18,11 +20,14 @@ object DashboardRepositoryModule {
     @Provides
     fun provideDashboardRepository(
         dataSource: EmsDataSource,
-        cache: DashboardCache,
+        dashboardCache: DashboardCache,
+        chartCache: ChartCache,
     ): EmsRepository = EmsRepositoryImp(
         dataSource = dataSource,
-        cache = cache,
-        mapper = DashboardStateMapper(HistoricDataMapper()),
+        dashboardCache = dashboardCache,
+        chartCache = chartCache,
+        dashboardStateMapper = DashboardStateMapper(),
+        chartStateMapper = ChartStateMapper(HistoricDataMapper()),
     )
 
 }
