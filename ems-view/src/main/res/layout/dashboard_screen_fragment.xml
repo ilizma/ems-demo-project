@@ -164,7 +164,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dashboard_screen_widget_text_margin_start"
-                        app:layout_constraintStart_toEndOf="@+id/building_demand_title"
+                        app:layout_constraintStart_toEndOf="@+id/dashboard_screen_tv_building_demand_title"
                         app:layout_constraintTop_toTopOf="@+id/dashboard_screen_tv_building_demand_title"
                         tools:text="127.03399999999999" />
 

@@ -4,6 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.ilizma.ems.presentation.model.ChartState
 import com.ilizma.ems.presentation.viewmodel.ChartScreenViewModel
 import com.ilizma.ems.view.databinding.ChartScreenFragmentBinding
+import com.ilizma.resources.R
 
 class ChartScreenFragmentBinderImp(
     viewModelLazy: Lazy<ChartScreenViewModel>,
@@ -15,19 +16,28 @@ class ChartScreenFragmentBinderImp(
 
     override fun bind(binding: ChartScreenFragmentBinding) {
         this.binding = binding
+        setupToolbar()
         setupObservers()
+    }
+
+    private fun setupToolbar() {
+        binding.chartScreenT.setNavigationIcon(R.drawable.ic_back)
+        binding.chartScreenT.setNavigationOnClickListener { viewModel.onBack() }
     }
 
     private fun setupObservers() {
         viewModel.chart.observe(
             lifecycleOwner(),
-        ) { onChartState(it) }
+            ::onChartState,
+        )
     }
 
     private fun onChartState(
         success: ChartState.Success,
     ) {
-        // TODO: set data
+        with(success.data) {
+            // TODO: set data
+        }
     }
 
 }

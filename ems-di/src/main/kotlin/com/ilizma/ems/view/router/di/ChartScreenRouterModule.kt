@@ -1,6 +1,5 @@
 package com.ilizma.ems.view.router.di
 
-import androidx.activity.OnBackPressedDispatcher
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -25,7 +24,7 @@ object ChartScreenRouterModule {
         @Named(CHART_SCREEN_VIEW_MODEL_PROVIDER_NAMED) viewModelProviderFactory: ViewModelProvider.Factory,
     ): ChartScreenRouter = ChartScreenRouterImp(
         lifecycleOwner = { fragment.viewLifecycleOwner },
-        onBackPressedDispatcher = OnBackPressedDispatcher(),
+        onBackPressedDispatcher = fragment.requireActivity().onBackPressedDispatcher,
         viewModelLazy = fragment.viewModels { viewModelProviderFactory },
         navigator = navigator,
     )

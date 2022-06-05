@@ -12,9 +12,9 @@
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
+            android:id="@+id/chart_screen_t"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="@string/app_name"
             app:titleTextColor="?android:attr/textColorPrimary" />
 
     </com.google.android.material.appbar.AppBarLayout>
