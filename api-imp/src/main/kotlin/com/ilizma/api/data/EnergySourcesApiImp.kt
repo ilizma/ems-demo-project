@@ -7,9 +7,11 @@ import com.ilizma.api.model.LiveData
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapter
 import io.reactivex.rxjava3.core.Single
+import java.util.concurrent.TimeUnit
 
 private const val HISTORIC_DATA_JSON_FILE_NAME = "historic_data.json"
 private const val LIVE_DATA_JSON_FILE_NAME = "live_data.json"
+private const val NET_SIMULATOR_DELAY_IN_SECONDS = 3L
 
 class EnergySourcesApiImp(
     private val context: Context,
@@ -20,7 +22,7 @@ class EnergySourcesApiImp(
     override fun getHistoricDataList(
     ): Single<List<HistoricData>> = context.getJsonStringFromAsset(HISTORIC_DATA_JSON_FILE_NAME)
         .let { moshi.adapter<List<HistoricData>>().fromJson(it) }
-        ?.let { Single.just(it) }
+        ?.let { Single.just(it).delay(NET_SIMULATOR_DELAY_IN_SECONDS, TimeUnit.SECONDS) }
         ?: throw IllegalArgumentException("Malformed $HISTORIC_DATA_JSON_FILE_NAME")
 
     @OptIn(ExperimentalStdlibApi::class)

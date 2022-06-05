@@ -6,23 +6,22 @@
 
     <fragment
         android:id="@+id/dashboard_screen"
-        android:name="com.ilizma.dashboard.view.fragment.DashboardScreenFragment"
+        android:name="com.ilizma.ems.view.fragment.DashboardScreenFragment"
         tools:layout="@layout/dashboard_screen_fragment">
 
-       <!-- TODO add navigation
        <action
-            android:id="@+id/go_from_dashboard_to_detail"
-            app:destination="@id/detail_screen" />
+            android:id="@+id/go_from_dashboard_to_chart"
+            app:destination="@id/chart_screen" />
     </fragment>
 
     <fragment
-        android:id="@+id/detail_screen"
-        android:name="com.ilizma.schedule.view.fragment.ScheduleDetailFragment"
-        tools:layout="@layout/schedule_detail_fragment">
+        android:id="@+id/chart_screen"
+        android:name="com.ilizma.ems.view.fragment.ChartScreenFragment"
+        tools:layout="@layout/chart_screen_fragment">
 
         <argument
-            android:name="type"
-            app:argType="com.ilizma.schedule.flow.model.Type" /> -->
+            android:name="id"
+            app:argType="string" />
     </fragment>
 
 </navigation>

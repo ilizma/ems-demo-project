@@ -71,16 +71,18 @@ dependencies {
     implementation(project(":error-management-view-imp"))
     // endregion
 
-    // region Dashboard
-    implementation(project(":dashboard-di"))
-    implementation(project(":dashboard-view"))
-    implementation(project(":dashboard-view-imp"))
-    implementation(project(":dashboard-presentation"))
-    implementation(project(":dashboard-presentation-imp"))
-    implementation(project(":dashboard-domain"))
-    implementation(project(":dashboard-domain-imp"))
-    implementation(project(":dashboard-data"))
-    implementation(project(":dashboard-data-imp"))
+    // region Ems
+    implementation(project(":ems-di"))
+    implementation(project(":ems-flow"))
+    implementation(project(":ems-flow-imp"))
+    implementation(project(":ems-view"))
+    implementation(project(":ems-view-imp"))
+    implementation(project(":ems-presentation"))
+    implementation(project(":ems-presentation-imp"))
+    implementation(project(":ems-domain"))
+    implementation(project(":ems-domain-imp"))
+    implementation(project(":ems-data"))
+    implementation(project(":ems-data-imp"))
     // endregion
 
 }

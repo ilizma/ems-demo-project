@@ -42,13 +42,14 @@ dependencies {
 
     // region Architecture
     implementation(Architecture.navigationFragment)
+    implementation(Architecture.navigationUi)
     // endregion
 
     // region Base
     implementation(project(":view-base"))
     // endregion
 
-    // region Dashboard
-    implementation(project(":dashboard-view"))
+    // region Ems
+    implementation(project(":ems-view"))
     // endregion
 }
