@@ -37,7 +37,10 @@ dependencies {
     // region Android
     implementation(Android.appcompat)
     implementation(AndroidUI.material)
-    implementation(AndroidUI.lottie)
+    // endregion
+
+    // region Ui
+    implementation(UI.lottie)
     // endregion
 
     // region Base

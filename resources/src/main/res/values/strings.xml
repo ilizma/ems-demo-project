@@ -23,4 +23,10 @@
     <string name="building_demand" translatable="false">Building demand:</string>
     <string name="statistics" translatable="false">Statistics in form of percentages for each source that supplies the building energy demand:</string>
 
+    <string name="kW" translatable="false">kW</string>
+    <string name="buildingActive" translatable="false">Building Active</string>
+    <string name="gridActive" translatable="false">Grid Active</string>
+    <string name="pvActive" translatable="false">Pv Active</string>
+    <string name="quasarsActive" translatable="false">Quasars Active</string>
+
 </resources>

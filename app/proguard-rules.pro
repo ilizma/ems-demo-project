@@ -26,3 +26,6 @@
   @com.squareup.moshi.FromJson <methods>;
   @com.squareup.moshi.ToJson <methods>;
 }
+
+#### AAChartModel
+-keep class com.github.aachartmodel.aainfographics.** { *; }

@@ -8,23 +8,37 @@ import com.ilizma.ems.data.model.HistoricData as DataHistoricData
 class HistoricDataMapper {
 
     fun from(
-        data: ApiHistoricData,
-    ): DataHistoricData = DataHistoricData(
-        buildingActivePower = data.buildingActivePower,
-        gridActivePower = data.gridActivePower,
-        pvActivePower = data.pvActivePower,
-        quasarsActivePower = data.quasarsActivePower,
-        date = data.timestamp.getFormattedDate()
-    )
+        data: List<ApiHistoricData>,
+    ): DataHistoricData {
+        val buildingActiveList = mutableListOf<Double>()
+        val gridActiveList = mutableListOf<Double>()
+        val pvActiveList = mutableListOf<Double>()
+        val quasarsActiveList = mutableListOf<Double>()
+        val dateList = mutableListOf<String>()
+        data.map {
+            buildingActiveList.add(it.buildingActivePower)
+            gridActiveList.add(it.gridActivePower)
+            pvActiveList.add(it.pvActivePower)
+            quasarsActiveList.add(it.quasarsActivePower)
+            dateList.add(it.timestamp.getFormattedDate())
+        }
+        return DataHistoricData(
+            buildingActive = buildingActiveList,
+            gridActive = gridActiveList,
+            pvActive = pvActiveList,
+            quasarsActive = quasarsActiveList,
+            dateList = dateList,
+        )
+    }
 
     fun from(
         data: DataHistoricData,
     ): HistoricData = HistoricData(
-        buildingActivePower = data.buildingActivePower,
-        gridActivePower = data.gridActivePower,
-        pvActivePower = data.pvActivePower,
-        quasarsActivePower = data.quasarsActivePower,
-        date = data.date
+        buildingActive = data.buildingActive,
+        gridActive = data.gridActive,
+        pvActive = data.pvActive,
+        quasarsActive = data.quasarsActive,
+        dateList = data.dateList,
     )
 
 }

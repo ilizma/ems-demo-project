@@ -10,7 +10,7 @@ class ChartStateMapper(
     fun from(
         state: ChartState,
     ): PresentationChartState.Success = (state as ChartState.Success).data
-        .map { mapper.from(it) }
+        .let { mapper.from(it) }
         .let { PresentationChartState.Success(it) }
 
 }

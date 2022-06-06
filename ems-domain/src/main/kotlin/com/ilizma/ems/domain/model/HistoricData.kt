@@ -1,9 +1,9 @@
 package com.ilizma.ems.domain.model
 
 data class HistoricData(
-    val buildingActivePower: Double,
-    val gridActivePower: Double,
-    val pvActivePower: Double,
-    val quasarsActivePower: Double,
-    val date: String,
+    val buildingActive: List<Double>,
+    val gridActive: List<Double>,
+    val pvActive: List<Double>,
+    val quasarsActive: List<Double>,
+    val dateList: List<String>,
 )

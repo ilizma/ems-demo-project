@@ -30,6 +30,7 @@ object Versions {
     const val materialVersion = "1.6.0-alpha01"
     const val shimmerVersion = "0.5.0"
     const val lottieVersion = "4.2.1"
+    const val chartVersion = "-SNAPSHOT"
 
     //android architecture component
     const val navigationVersion = "2.4.2"

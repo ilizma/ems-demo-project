@@ -41,6 +41,10 @@ dependencies {
     implementation(AndroidUI.recyclerview)
     // endregion
 
+    // region Ui
+    implementation(UI.chart)
+    // endregion
+
     // region Base
     implementation(project(":view-base"))
     // endregion

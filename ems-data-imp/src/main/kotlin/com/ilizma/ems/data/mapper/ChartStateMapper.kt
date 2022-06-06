@@ -11,7 +11,7 @@ class ChartStateMapper(
     fun from(
         data: List<ApiHistoricData>,
     ): DataChartState = DataChartState.Success(
-        data.map { mapper.from(it) }
+        mapper.from(data)
     )
 
     fun from(
@@ -19,7 +19,7 @@ class ChartStateMapper(
     ): ChartState = when (state) {
         is DataChartState.Error -> ChartState.Error(state.message)
         is DataChartState.Success -> state.data
-            .map { mapper.from(it) }
+            .let { mapper.from(it) }
             .let { ChartState.Success(it) }
     }
 
