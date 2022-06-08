@@ -13,6 +13,8 @@ abstract class ChartScreenViewModel : ViewModel() {
 
     abstract val navigationAction: LiveData<ChartScreenNavigationAction>
 
+    abstract fun getChart()
+
     abstract fun onBack()
 
 }

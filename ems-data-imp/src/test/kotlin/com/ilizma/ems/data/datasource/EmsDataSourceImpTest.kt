@@ -29,6 +29,7 @@ internal class EmsDataSourceImpTest {
     private lateinit var chartMapper: ChartStateMapper
 
     private lateinit var dataSource: EmsDataSource
+    private val unknownError = "unknownError"
 
     init {
         MockKAnnotations.init(this)
@@ -40,6 +41,7 @@ internal class EmsDataSourceImpTest {
             api = api,
             dashboardMapper = dashboardMapper,
             chartMapper = chartMapper,
+            unknownError = unknownError,
         )
     }
 
@@ -50,9 +52,25 @@ internal class EmsDataSourceImpTest {
         fun `given LiveData, when getDashboardState is called, then result should be the expected`() {
             // given
             val liveData = mockk<LiveData>()
-            val expected = mockk<DashboardState>()
+            val expected = mockk<DashboardState.Success>()
             every { api.getLiveData() } returns Single.just(liveData)
             every { dashboardMapper.from(liveData) } returns expected
+
+            // when
+            val resultObserver = dataSource.getDashboardState()
+                .observeOn(Schedulers.trampoline())
+                .test()
+
+            // then
+            resultObserver.assertValue { it == expected }
+        }
+
+        @Test
+        fun `given error, when getDashboardState is called, then result should be the expected`() {
+            // given
+            val liveData = mockk<IllegalArgumentException>()
+            val expected = mockk<DashboardState.Error>()
+            every { api.getLiveData() } returns Single.error(liveData)
 
             // when
             val resultObserver = dataSource.getDashboardState()
@@ -72,7 +90,7 @@ internal class EmsDataSourceImpTest {
         fun `given HistoricData list, when getChartState is called, then result should be the expected`() {
             // given
             val historicDataList = mockk<List<HistoricData>>()
-            val expected = mockk<ChartState>()
+            val expected = mockk<ChartState.Success>()
             every { api.getHistoricDataList() } returns Single.just(historicDataList)
             every { chartMapper.from(historicDataList) } returns expected
 

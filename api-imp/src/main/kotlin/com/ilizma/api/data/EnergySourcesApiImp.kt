@@ -23,13 +23,13 @@ class EnergySourcesApiImp(
     ): Single<List<HistoricData>> = context.getJsonStringFromAsset(HISTORIC_DATA_JSON_FILE_NAME)
         .let { moshi.adapter<List<HistoricData>>().fromJson(it) }
         ?.let { Single.just(it) }
-        ?: throw IllegalArgumentException("Malformed $HISTORIC_DATA_JSON_FILE_NAME")
+        ?: Single.error(IllegalArgumentException("Malformed $HISTORIC_DATA_JSON_FILE_NAME"))
 
     @OptIn(ExperimentalStdlibApi::class)
     override fun getLiveData(
     ): Single<LiveData> = context.getJsonStringFromAsset(LIVE_DATA_JSON_FILE_NAME)
         .let { moshi.adapter<LiveData>().fromJson(it) }
         ?.let { Single.just(it).delay(NET_SIMULATOR_DELAY_IN_SECONDS, TimeUnit.SECONDS) }
-        ?: throw IllegalArgumentException("Malformed $LIVE_DATA_JSON_FILE_NAME")
+        ?: Single.error(IllegalArgumentException("Malformed $HISTORIC_DATA_JSON_FILE_NAME"))
 
 }

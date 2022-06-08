@@ -17,7 +17,7 @@ import io.reactivex.rxjava3.kotlin.addTo
 import com.ilizma.ems.presentation.model.ChartState as PresentationChartState
 
 class ChartScreenViewModelImp @AssistedInject constructor(
-    useCase: ChartUseCase,
+    private val useCase: ChartUseCase,
     @Assisted private val mapper: ChartStateMapper,
     @Assisted private val backgroundScheduler: Scheduler,
     @Assisted private val compositeDisposable: CompositeDisposable,
@@ -31,6 +31,10 @@ class ChartScreenViewModelImp @AssistedInject constructor(
     override val navigationAction: LiveData<ChartScreenNavigationAction> = _navigationAction
 
     init {
+        getChart()
+    }
+
+    override fun getChart() {
         useCase()
             .subscribeOn(backgroundScheduler)
             .observeOn(backgroundScheduler)

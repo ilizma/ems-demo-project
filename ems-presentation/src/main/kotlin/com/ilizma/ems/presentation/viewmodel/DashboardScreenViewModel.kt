@@ -13,6 +13,8 @@ abstract class DashboardScreenViewModel : ViewModel() {
 
     abstract val navigationAction: LiveData<DashboardScreenNavigationAction>
 
+    abstract fun getDashboard()
+
     abstract fun openDetail()
 
     abstract fun onBack()

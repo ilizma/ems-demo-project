@@ -4,6 +4,6 @@ import com.ilizma.ems.data.model.ChartState
 
 interface ChartCache {
 
-    var cache: ChartState?
+    var cache: ChartState.Success?
 
 }

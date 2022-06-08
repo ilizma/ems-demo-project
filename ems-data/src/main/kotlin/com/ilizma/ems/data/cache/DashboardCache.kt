@@ -4,6 +4,6 @@ import com.ilizma.ems.data.model.DashboardState
 
 interface DashboardCache {
 
-    var cache: DashboardState?
+    var cache: DashboardState.Success?
 
 }

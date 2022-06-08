@@ -4,6 +4,8 @@ import androidx.lifecycle.LifecycleOwner
 import com.ilizma.ems.presentation.model.DashboardState
 import com.ilizma.ems.presentation.viewmodel.DashboardScreenViewModel
 import com.ilizma.ems.view.databinding.DashboardScreenFragmentBinding
+import com.ilizma.resources.R
+import com.ilizma.view.extensions.snackbar
 
 class DashboardScreenFragmentBinderImp(
     viewModelLazy: Lazy<DashboardScreenViewModel>,
@@ -28,6 +30,10 @@ class DashboardScreenFragmentBinderImp(
             lifecycleOwner(),
             ::onDashboardState,
         )
+        viewModel.error.observe(
+            lifecycleOwner(),
+            ::onError,
+        )
     }
 
     private fun onDashboardState(
@@ -42,6 +48,15 @@ class DashboardScreenFragmentBinderImp(
             binding.dashboardScreenTvBuildingDemand.text = buildingDemand.toString()
             binding.dashboardScreenTvStatistics.text = systemSoc.toString()
         }
+    }
+
+    private fun onError(
+        errorMessage: String
+    ) {
+        binding.root.snackbar(
+            title = errorMessage,
+            action = binding.root.context.getString(R.string.retry),
+        ) { viewModel.getDashboard() }
     }
 
 }

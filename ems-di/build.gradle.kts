@@ -51,6 +51,10 @@ dependencies {
     implementation(project(":api"))
     // endregion
 
+    // region Resources
+    implementation(project(":resources"))
+    // endregion
+
     // region Ems
     implementation(project(":ems-flow"))
     implementation(project(":ems-flow-imp"))

@@ -11,14 +11,17 @@ class EmsDataSourceImp(
     private val api: EnergySourcesApi,
     private val dashboardMapper: DashboardStateMapper,
     private val chartMapper: ChartStateMapper,
+    private val unknownError: String,
 ) : EmsDataSource {
 
     override fun getDashboardState(
     ): Single<DashboardState> = api.getLiveData()
         .map { dashboardMapper.from(it) }
+        .doOnError { DashboardState.Error(it.message ?: unknownError) }
 
     override fun getChartState(
     ): Single<ChartState> = api.getHistoricDataList()
         .map { chartMapper.from(it) }
+        .doOnError { DashboardState.Error(it.message ?: unknownError) }
 
 }

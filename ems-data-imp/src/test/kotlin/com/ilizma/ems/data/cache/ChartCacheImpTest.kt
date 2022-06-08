@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 
-internal class DashboardCacheImpTest {
+internal class ChartCacheImpTest {
 
     private lateinit var cache: DashboardCache
 

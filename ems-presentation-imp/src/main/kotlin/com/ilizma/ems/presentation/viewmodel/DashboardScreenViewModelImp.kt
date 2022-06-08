@@ -18,7 +18,7 @@ import io.reactivex.rxjava3.kotlin.addTo
 import com.ilizma.ems.presentation.model.DashboardState as PresentationDashboardState
 
 class DashboardScreenViewModelImp @AssistedInject constructor(
-    useCase: DashboardUseCase,
+    private val useCase: DashboardUseCase,
     @Assisted private val mapper: DashboardStateMapper,
     @Assisted private val backgroundScheduler: Scheduler,
     @Assisted private val compositeDisposable: CompositeDisposable,
@@ -32,6 +32,10 @@ class DashboardScreenViewModelImp @AssistedInject constructor(
     override val navigationAction: LiveData<DashboardScreenNavigationAction> = _navigationAction
 
     init {
+        getDashboard()
+    }
+
+    override fun getDashboard() {
         useCase()
             .subscribeOn(backgroundScheduler)
             .observeOn(backgroundScheduler)

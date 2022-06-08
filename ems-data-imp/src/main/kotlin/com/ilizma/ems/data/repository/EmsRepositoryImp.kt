@@ -35,7 +35,7 @@ class EmsRepositoryImp(
 
     private fun getDashboardStateFromApiAndSaveCache(
     ): Single<DataDashboardState> = dataSource.getDashboardState()
-        .doOnSuccess { dashboardCache.cache = it }
+        .doOnSuccess { if (it is DataDashboardState.Success) dashboardCache.cache = it }
 
     private fun getChartStateFromCache(
     ): Single<DataChartState>? = chartCache.cache
@@ -43,6 +43,6 @@ class EmsRepositoryImp(
 
     private fun getChartStateFromApiAndSaveCache(
     ): Single<DataChartState> = dataSource.getChartState()
-        .doOnSuccess { chartCache.cache = it }
+        .doOnSuccess { if (it is DataChartState.Success) chartCache.cache = it }
 
 }

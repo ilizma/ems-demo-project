@@ -11,6 +11,7 @@ import com.ilizma.ems.presentation.model.HistoricData
 import com.ilizma.ems.presentation.viewmodel.ChartScreenViewModel
 import com.ilizma.ems.view.databinding.ChartScreenFragmentBinding
 import com.ilizma.resources.R
+import com.ilizma.view.extensions.snackbar
 
 class ChartScreenFragmentBinderImp(
     viewModelLazy: Lazy<ChartScreenViewModel>,
@@ -36,6 +37,10 @@ class ChartScreenFragmentBinderImp(
             lifecycleOwner(),
             ::onChartState,
         )
+        viewModel.error.observe(
+            lifecycleOwner(),
+            ::onError,
+        )
     }
 
     private fun onChartState(
@@ -51,6 +56,15 @@ class ChartScreenFragmentBinderImp(
                 .series(success.data.createColumnsArray(this))
                 .let { binding.chartScreenAacvChart.aa_drawChartWithChartModel(it) }
         }
+    }
+
+    private fun onError(
+        errorMessage: String
+    ) {
+        binding.root.snackbar(
+            title = errorMessage,
+            action = binding.root.context.getString(R.string.retry),
+        ) { viewModel.getChart() }
     }
 
     private fun HistoricData.createColumnsArray(

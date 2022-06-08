@@ -4,6 +4,6 @@ import com.ilizma.ems.data.model.ChartState
 
 class ChartCacheImp : ChartCache {
 
-    override var cache: ChartState? = null
+    override var cache: ChartState.Success? = null
 
 }

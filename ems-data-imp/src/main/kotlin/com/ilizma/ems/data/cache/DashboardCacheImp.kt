@@ -4,6 +4,6 @@ import com.ilizma.ems.data.model.DashboardState
 
 class DashboardCacheImp : DashboardCache {
 
-    override var cache: DashboardState? = null
+    override var cache: DashboardState.Success? = null
 
 }
