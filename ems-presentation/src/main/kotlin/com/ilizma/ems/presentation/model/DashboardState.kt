@@ -8,4 +8,6 @@ sealed class DashboardState {
 
     data class Error(val message: String) : DashboardState()
 
+    object Loading : DashboardState()
+
 }

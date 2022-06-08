@@ -41,8 +41,13 @@ dependencies {
     implementation(AndroidUI.recyclerview)
     // endregion
 
+    // region AndroidKtx
+    implementation(AndroidKtx.core)
+    // endregion
+
     // region Ui
     implementation(UI.chart)
+    implementation(UI.shimmer)
     // endregion
 
     // region Base

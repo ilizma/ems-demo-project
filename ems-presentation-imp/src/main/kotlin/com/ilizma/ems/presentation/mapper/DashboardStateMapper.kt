@@ -9,9 +9,12 @@ class DashboardStateMapper {
 
     fun from(
         state: DashboardState,
-    ): PresentationDashboardState.Success = (state as DashboardState.Success).data
-        .let { generateLiveData(it) }
-        .let { PresentationDashboardState.Success(it) }
+    ): PresentationDashboardState = when (state) {
+        is DashboardState.Error -> PresentationDashboardState.Error(state.message)
+        is DashboardState.Success -> state.data
+            .let { generateLiveData(it) }
+            .let { PresentationDashboardState.Success(it) }
+    }
 
     private fun generateLiveData(
         data: LiveData,

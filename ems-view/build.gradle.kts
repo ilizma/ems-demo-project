@@ -43,6 +43,7 @@ dependencies {
 
     // region Ui
     implementation(UI.chart)
+    implementation(UI.shimmer)
     // endregion
 
     // region Resources

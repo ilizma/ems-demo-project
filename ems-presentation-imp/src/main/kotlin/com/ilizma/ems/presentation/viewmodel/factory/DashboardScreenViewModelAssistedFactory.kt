@@ -19,8 +19,8 @@ interface DashboardScreenViewModelAssistedFactory {
         mapper: DashboardStateMapper,
         backgroundScheduler: Scheduler,
         compositeDisposable: CompositeDisposable,
-        _dashboardState: MutableLiveData<DashboardState.Success>,
-        @Assisted(ERROR_ASSISTED) _error: MutableLiveData<String>,
+        _dashboardState: MutableLiveData<DashboardState>,
+        @Assisted(ERROR_ASSISTED) _error: MutableLiveData<DashboardState.Error>,
         _navigationAction: SingleLiveEvent<DashboardScreenNavigationAction>
     ): DashboardScreenViewModelImp
 

@@ -19,8 +19,8 @@ interface ChartScreenViewModelAssistedFactory {
         mapper: ChartStateMapper,
         backgroundScheduler: Scheduler,
         compositeDisposable: CompositeDisposable,
-        _dashboardState: MutableLiveData<ChartState.Success>,
-        @Assisted(ERROR_ASSISTED) _error: MutableLiveData<String>,
+        _dashboardState: MutableLiveData<ChartState>,
+        @Assisted(ERROR_ASSISTED) _error: MutableLiveData<ChartState.Error>,
         _navigationAction: SingleLiveEvent<ChartScreenNavigationAction>
     ): ChartScreenViewModelImp
 

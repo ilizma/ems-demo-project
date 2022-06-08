@@ -21,13 +21,13 @@ class ChartScreenViewModelImp @AssistedInject constructor(
     @Assisted private val mapper: ChartStateMapper,
     @Assisted private val backgroundScheduler: Scheduler,
     @Assisted private val compositeDisposable: CompositeDisposable,
-    @Assisted private val _chartState: MutableLiveData<PresentationChartState.Success>,
-    @Assisted(ERROR_ASSISTED) private val _error: MutableLiveData<String>,
+    @Assisted private val _chartState: MutableLiveData<PresentationChartState>,
+    @Assisted(ERROR_ASSISTED) private val _error: MutableLiveData<PresentationChartState.Error>,
     @Assisted private val _navigationAction: SingleLiveEvent<ChartScreenNavigationAction>,
 ) : ChartScreenViewModel() {
 
-    override val chart: LiveData<PresentationChartState.Success> = _chartState
-    override val error: LiveData<String> = _error
+    override val chart: LiveData<PresentationChartState> = _chartState
+    override val error: LiveData<PresentationChartState.Error> = _error
     override val navigationAction: LiveData<ChartScreenNavigationAction> = _navigationAction
 
     init {
@@ -35,6 +35,7 @@ class ChartScreenViewModelImp @AssistedInject constructor(
     }
 
     override fun getChart() {
+        _chartState.postValue(PresentationChartState.Loading)
         useCase()
             .subscribeOn(backgroundScheduler)
             .observeOn(backgroundScheduler)
@@ -49,10 +50,17 @@ class ChartScreenViewModelImp @AssistedInject constructor(
     private fun onChartState(
         state: ChartState,
     ) {
+        mapper.from(state)
+            .let { manageState(it) }
+
+    }
+
+    private fun manageState(
+        state: PresentationChartState
+    ) {
         when (state) {
-            is ChartState.Error -> _error.postValue(state.message)
-            is ChartState.Success -> mapper.from(state)
-                .let { _chartState.postValue(it) }
+            is PresentationChartState.Error -> _error.postValue(state)
+            is PresentationChartState.Success -> _chartState.postValue(state)
         }
     }
 

@@ -8,4 +8,6 @@ sealed class ChartState {
 
     data class Error(val message: String) : ChartState()
 
+    object Loading : ChartState()
+
 }

@@ -7,9 +7,9 @@ import com.ilizma.ems.presentation.model.DashboardState
 
 abstract class DashboardScreenViewModel : ViewModel() {
 
-    abstract val dashboard: LiveData<DashboardState.Success>
+    abstract val dashboardState: LiveData<DashboardState>
 
-    abstract val error: LiveData<String>
+    abstract val error: LiveData<DashboardState.Error>
 
     abstract val navigationAction: LiveData<DashboardScreenNavigationAction>
 

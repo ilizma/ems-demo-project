@@ -9,8 +9,11 @@ class ChartStateMapper(
 
     fun from(
         state: ChartState,
-    ): PresentationChartState.Success = (state as ChartState.Success).data
-        .let { mapper.from(it) }
-        .let { PresentationChartState.Success(it) }
+    ): PresentationChartState = when (state) {
+        is ChartState.Error -> PresentationChartState.Error(state.message)
+        is ChartState.Success -> state.data
+            .let { mapper.from(it) }
+            .let { PresentationChartState.Success(it) }
+    }
 
 }

@@ -2,4 +2,12 @@
 <resources>
     <dimen name="dashboard_screen_widget_margin">8dp</dimen>
     <dimen name="dashboard_screen_widget_text_margin_start">4dp</dimen>
+
+    <dimen name="dashboard_screen_loading_title_width_1">120dp</dimen>
+    <dimen name="dashboard_screen_loading_title_height">20dp</dimen>
+    <dimen name="dashboard_screen_loading_subtitle_width_1">60dp</dimen>
+    <dimen name="dashboard_screen_loading_subtitle_top_margin">2dp</dimen>
+    <dimen name="dashboard_screen_loading_subtitle_height">18dp</dimen>
+    <dimen name="dashboard_screen_loading_title_width_2">160dp</dimen>
+    <dimen name="dashboard_screen_loading_subtitle_width_2">80dp</dimen>
 </resources>

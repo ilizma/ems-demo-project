@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,9 +7,13 @@
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
+        android:id="@+id/dashboard_screen_abl_toolbar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:elevation="0dp">
+        app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
@@ -20,8 +24,14 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:id="@+id/dashboard_screen_sv_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_screen_abl_toolbar"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -110,6 +120,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dashboard_screen_widget_text_margin_start"
+                        app:layout_constraintBottom_toBottomOf="@+id/dashboard_screen_tv_solar_power_title"
                         app:layout_constraintStart_toEndOf="@+id/dashboard_screen_tv_solar_power_title"
                         app:layout_constraintTop_toTopOf="@+id/dashboard_screen_tv_solar_power_title"
                         tools:text="7.827" />
@@ -128,6 +139,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dashboard_screen_widget_text_margin_start"
+                        app:layout_constraintBottom_toBottomOf="@+id/dashboard_screen_tv_quasars_power_title"
                         app:layout_constraintStart_toEndOf="@+id/dashboard_screen_tv_quasars_power_title"
                         app:layout_constraintTop_toTopOf="@+id/dashboard_screen_tv_quasars_power_title"
                         tools:text="-38.732" />
@@ -146,6 +158,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dashboard_screen_widget_text_margin_start"
+                        app:layout_constraintBottom_toBottomOf="@+id/dashboard_screen_tv_grid_power_title"
                         app:layout_constraintStart_toEndOf="@+id/dashboard_screen_tv_grid_power_title"
                         app:layout_constraintTop_toTopOf="@+id/dashboard_screen_tv_grid_power_title"
                         tools:text="80.475" />
@@ -164,6 +177,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dashboard_screen_widget_text_margin_start"
+                        app:layout_constraintBottom_toBottomOf="@+id/dashboard_screen_tv_building_demand_title"
                         app:layout_constraintStart_toEndOf="@+id/dashboard_screen_tv_building_demand_title"
                         app:layout_constraintTop_toTopOf="@+id/dashboard_screen_tv_building_demand_title"
                         tools:text="127.03399999999999" />
@@ -206,4 +220,13 @@
 
     </ScrollView>
 
-</LinearLayout>
+    <include
+        android:id="@+id/dashboard_screen_i_loading"
+        layout="@layout/dashboard_screen_loading_fragment"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_screen_abl_toolbar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.ilizma.ems.view.bind
 
+import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import com.ilizma.ems.presentation.model.DashboardState
 import com.ilizma.ems.presentation.viewmodel.DashboardScreenViewModel
@@ -26,7 +27,7 @@ class DashboardScreenFragmentBinderImp(
     }
 
     private fun setupObserver() {
-        viewModel.dashboard.observe(
+        viewModel.dashboardState.observe(
             lifecycleOwner(),
             ::onDashboardState,
         )
@@ -37,24 +38,30 @@ class DashboardScreenFragmentBinderImp(
     }
 
     private fun onDashboardState(
-        success: DashboardState.Success,
+        state: DashboardState,
     ) {
-        with(success.data) {
-            binding.dashboardScreenTvQuasarChargerDischarged.text = totalEnergy.toString()
-            binding.dashboardScreenTvQuasarChargerCharged.text = currentEnergy.toString()
-            binding.dashboardScreenTvSolarPower.text = solarPower.toString()
-            binding.dashboardScreenTvQuasarsPower.text = quasarsPower.toString()
-            binding.dashboardScreenTvGridPower.text = gridPower.toString()
-            binding.dashboardScreenTvBuildingDemand.text = buildingDemand.toString()
-            binding.dashboardScreenTvStatistics.text = systemSoc.toString()
+        binding.dashboardScreenILoading
+            .dashboardScreenLoadingSflContent.isVisible = state == DashboardState.Loading
+        binding.dashboardScreenSvContent.isVisible = state != DashboardState.Loading
+        when (state) {
+            is DashboardState.Success -> with(state.data) {
+                binding.dashboardScreenTvQuasarChargerDischarged.text = totalEnergy.toString()
+                binding.dashboardScreenTvQuasarChargerCharged.text = currentEnergy.toString()
+                binding.dashboardScreenTvSolarPower.text = solarPower.toString()
+                binding.dashboardScreenTvQuasarsPower.text = quasarsPower.toString()
+                binding.dashboardScreenTvGridPower.text = gridPower.toString()
+                binding.dashboardScreenTvBuildingDemand.text = buildingDemand.toString()
+                binding.dashboardScreenTvStatistics.text = systemSoc.toString()
+            }
         }
+
     }
 
     private fun onError(
-        errorMessage: String
+        error: DashboardState.Error,
     ) {
         binding.root.snackbar(
-            title = errorMessage,
+            title = error.message,
             action = binding.root.context.getString(R.string.retry),
         ) { viewModel.getDashboard() }
     }

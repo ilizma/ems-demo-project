@@ -1,6 +1,7 @@
 package com.ilizma.ems.view.bind
 
 import android.content.Context
+import androidx.core.view.isVisible
 import androidx.lifecycle.LifecycleOwner
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
@@ -44,25 +45,31 @@ class ChartScreenFragmentBinderImp(
     }
 
     private fun onChartState(
-        success: ChartState.Success,
+        state: ChartState,
     ) {
-        with(binding.root.context) {
-            AAChartModel()
-                .chartType(AAChartType.Line)
-                .zoomType(AAChartZoomType.X)
-                .yAxisTitle(getString(R.string.kW))
-                .tooltipValueSuffix(getString(R.string.kW))
-                .categories(success.data.dateList.toTypedArray())
-                .series(success.data.createColumnsArray(this))
-                .let { binding.chartScreenAacvChart.aa_drawChartWithChartModel(it) }
+        binding.chartScreenCpiLoading.isVisible = state == ChartState.Loading
+        binding.chartScreenAacvChart.isVisible = state != ChartState.Loading
+        when (state) {
+            is ChartState.Success -> with(binding.root.context) {
+                AAChartModel()
+                    .chartType(AAChartType.Line)
+                    .zoomType(AAChartZoomType.X)
+                    .yAxisTitle(getString(R.string.kW))
+                    .tooltipValueSuffix(getString(R.string.kW))
+                    .categories(state.data.dateList.toTypedArray())
+                    .series(state.data.createColumnsArray(this))
+                    .let { binding.chartScreenAacvChart.aa_drawChartWithChartModel(it) }
+            }
+
         }
+
     }
 
     private fun onError(
-        errorMessage: String
+        error: ChartState.Error
     ) {
         binding.root.snackbar(
-            title = errorMessage,
+            title = error.message,
             action = binding.root.context.getString(R.string.retry),
         ) { viewModel.getChart() }
     }

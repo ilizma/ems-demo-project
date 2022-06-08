@@ -22,13 +22,13 @@ class DashboardScreenViewModelImp @AssistedInject constructor(
     @Assisted private val mapper: DashboardStateMapper,
     @Assisted private val backgroundScheduler: Scheduler,
     @Assisted private val compositeDisposable: CompositeDisposable,
-    @Assisted private val _dashboardState: MutableLiveData<PresentationDashboardState.Success>,
-    @Assisted(ERROR_ASSISTED) private val _error: MutableLiveData<String>,
+    @Assisted private val _dashboardState: MutableLiveData<PresentationDashboardState>,
+    @Assisted(ERROR_ASSISTED) private val _error: MutableLiveData<PresentationDashboardState.Error>,
     @Assisted private val _navigationAction: SingleLiveEvent<DashboardScreenNavigationAction>,
 ) : DashboardScreenViewModel() {
 
-    override val dashboard: LiveData<PresentationDashboardState.Success> = _dashboardState
-    override val error: LiveData<String> = _error
+    override val dashboardState: LiveData<PresentationDashboardState> = _dashboardState
+    override val error: LiveData<PresentationDashboardState.Error> = _error
     override val navigationAction: LiveData<DashboardScreenNavigationAction> = _navigationAction
 
     init {
@@ -36,6 +36,7 @@ class DashboardScreenViewModelImp @AssistedInject constructor(
     }
 
     override fun getDashboard() {
+        _dashboardState.postValue(PresentationDashboardState.Loading)
         useCase()
             .subscribeOn(backgroundScheduler)
             .observeOn(backgroundScheduler)
@@ -54,10 +55,17 @@ class DashboardScreenViewModelImp @AssistedInject constructor(
     private fun onDashboardState(
         state: DashboardState,
     ) {
+        mapper.from(state)
+            .let { manageState(it) }
+
+    }
+
+    private fun manageState(
+        state: PresentationDashboardState
+    ) {
         when (state) {
-            is DashboardState.Error -> _error.postValue(state.message)
-            is DashboardState.Success -> mapper.from(state)
-                .let { _dashboardState.postValue(it) }
+            is PresentationDashboardState.Error -> _error.postValue(state)
+            is PresentationDashboardState.Success -> _dashboardState.postValue(state)
         }
     }
 

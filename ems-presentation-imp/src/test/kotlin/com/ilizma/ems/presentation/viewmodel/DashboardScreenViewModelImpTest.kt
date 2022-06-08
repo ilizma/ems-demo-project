@@ -69,7 +69,7 @@ internal class DashboardScreenViewModelImpTest {
             initViewModel()
 
             // then
-            assertEquals(expected, viewModel.dashboard.value)
+            assertEquals(expected, viewModel.dashboardState.value)
         }
 
         @Test
