@@ -8,6 +8,10 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
+tasks.test {
+    useJUnitPlatform()
+}
+
 dependencies {
     // region Rx
     implementation(Rx.java)

@@ -20,7 +20,6 @@ object Kotlin {
 object Android {
     val appcompat by lazy { "androidx.appcompat:appcompat:${Versions.supportVersion}" }
     val v4 by lazy { "androidx.legacy:legacy-support-v4:${Versions.legacyVersion}" }
-    val activity by lazy { "androidx.activity:activity:${Versions.activityVersion}" }
 }
 
 object AndroidKtx {
@@ -47,7 +46,6 @@ object Architecture {
     val lifecycleCommon by lazy { "androidx.lifecycle:lifecycle-common-java8:${Versions.lifecycleVersion}" }
     val lifecycleViewModel by lazy { "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleVersion}" }
     val lifecycleLivedata by lazy { "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycleVersion}" }
-    val lifecycleReactivestreams by lazy { "androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.lifecycleVersion}" }
 }
 
 object CustomActivityOnCrash {

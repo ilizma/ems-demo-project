@@ -17,7 +17,7 @@ object ChartScreenBackCloseNavigatorModule {
     fun provideChartScreenBackCloseNavigator(
         fragment: Fragment,
     ): ChartScreenBackCloseNavigator = ChartScreenBackCloseNavigatorImp(
-        navController = fragment.findNavController(),
+        navController = { fragment.findNavController() },
     )
 
 }

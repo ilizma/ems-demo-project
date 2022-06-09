@@ -17,17 +17,27 @@ android {
         getByName("test").java.srcDirs("src/test/kotlin")
     }
 
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+
+        unitTests.all {
+            it.useJUnitPlatform()
+        }
+    }
+
 }
 
 dependencies {
-    //region Android // TODO: check 
-    implementation(Android.appcompat)
-    implementation(Android.activity)
+    // region Architecture
+    implementation(Architecture.lifecycleLivedata)
+    implementation(Architecture.navigationFragment)
     // endregion
 
-    //region Architecture
-    implementation(Architecture.lifecycleCommon) // TODO: check
-    implementation(Architecture.navigationFragment)
+    // region Test
+    testImplementation(Test.mockk)
+    testImplementation(Test.junitApi)
+    testRuntimeOnly(Test.junitEngine)
+    testImplementation(project(":test-base"))
     // endregion
 
     //region App

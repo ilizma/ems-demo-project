@@ -19,7 +19,6 @@ object Versions {
     //android
     const val supportVersion = "1.4.0"
     const val legacyVersion = "1.0.0"
-    const val activityVersion = "1.4.0"
 
     //android KTX libs
     const val coreKtxVersion = "1.7.0"

@@ -11,10 +11,12 @@ import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.mockk
+import io.mockk.verify
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -41,7 +43,8 @@ internal class ChartScreenViewModelImpTest {
         MockKAnnotations.init(this)
     }
 
-    private fun initViewModel() {
+    @BeforeEach
+    private fun setup() {
         viewModel = ChartScreenViewModelImp(
             useCase = useCase,
             mapper = mapper,
@@ -54,36 +57,34 @@ internal class ChartScreenViewModelImpTest {
     }
 
     @Nested
-    inner class Init {
+    inner class GetChart {
 
         @Test
-        fun `given a Success ChartState, when init is executed, then the liveData value should be the expected`() {
+        fun `given a Success ChartState, when getChart is executed, then the liveData value should be the expected`() {
             // given
             val state = mockk<ChartState.Success>()
-            val expected = mockk<PresentationChartState.Success>()
+            val presentationState = mockk<PresentationChartState.Success>()
             every { useCase() } returns Single.just(state)
-            every { mapper.from(state) } returns expected
+            every { mapper.from(state) } returns presentationState
 
             // when
-            initViewModel()
+            viewModel.getChart()
 
             // then
-            assertEquals(expected, viewModel.chart.value)
+            verify { useCase() }
         }
 
         @Test
-        fun `given a Error ChartState, when init is executed, then the liveData value should be the expected`() {
+        fun `given a Error ChartState, when getChart is executed, then the liveData value should be the expected`() {
             // given
-            val expected = "errorMessage"
             val state = mockk<ChartState.Error>()
             every { useCase() } returns Single.just(state)
-            every { state.message } returns expected
 
             // when
-            initViewModel()
+            viewModel.getChart()
 
             // then
-            assertEquals(expected, viewModel.error.value)
+            verify { useCase() }
         }
 
     }
@@ -95,7 +96,6 @@ internal class ChartScreenViewModelImpTest {
         fun `given initialized viewModel, when onBack is executed, then the liveData value should be the expected`() {
             // given
             val expected = Back
-            initViewModel()
 
             // when
             viewModel.onBack()

@@ -17,7 +17,7 @@ object ChartNavigatorModule {
     fun provideChartNavigator(
         fragment: Fragment,
     ): ChartNavigator = ChartNavigatorImp(
-        navController = fragment.findNavController(),
+        navController = { fragment.findNavController() },
     )
 
 }

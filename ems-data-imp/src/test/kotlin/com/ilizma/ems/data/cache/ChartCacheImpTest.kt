@@ -1,6 +1,7 @@
 package com.ilizma.ems.data.cache
 
-import com.ilizma.ems.data.model.DashboardState
+import com.ilizma.ems.data.model.ChartState
+import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -10,18 +11,18 @@ import org.junit.jupiter.api.Test
 
 internal class ChartCacheImpTest {
 
-    private lateinit var cache: DashboardCache
+    private lateinit var cache: ChartCache
 
     @BeforeEach
-    fun setup() {
-        cache = DashboardCacheImp()
+    private fun setup() {
+        cache = ChartCacheImp()
     }
 
     @Nested
     inner class GetCache {
 
         @Test
-        fun `given null DashboardState, when cache is called, then result should be the expected`() {
+        fun `given null ChartState, when cache is called, then result should be the expected`() {
             // given
             val expected = null
             cache.cache = expected
@@ -34,9 +35,9 @@ internal class ChartCacheImpTest {
         }
 
         @Test
-        fun `given a DashboardState, when cache is called, then result should be the expected`() {
+        fun `given a ChartState, when cache is called, then result should be the expected`() {
             // given
-            val expected = mockk<DashboardState.Success>()
+            val expected = mockk<ChartState.Success>()
             cache.cache = expected
 
             // when
@@ -44,20 +45,6 @@ internal class ChartCacheImpTest {
 
             // then
             assertEquals(expected, result)
-        }
-
-    }
-
-    @Nested
-    inner class SetCache {
-
-        @Test
-        fun `when cache is setted, then cache should be executed`() {
-            // given, when
-            cache.cache = mockk()
-
-            // then
-            verify { cache.cache }
         }
 
     }

@@ -36,7 +36,7 @@ internal class EmsDataSourceImpTest {
     }
 
     @BeforeEach
-    fun setup() {
+    private fun setup() {
         dataSource = EmsDataSourceImp(
             api = api,
             dashboardMapper = dashboardMapper,
@@ -68,9 +68,9 @@ internal class EmsDataSourceImpTest {
         @Test
         fun `given error, when getDashboardState is called, then result should be the expected`() {
             // given
-            val liveData = mockk<IllegalArgumentException>()
-            val expected = mockk<DashboardState.Error>()
-            every { api.getLiveData() } returns Single.error(liveData)
+            val errorMessage = "errorMessage"
+            val exception = IllegalArgumentException(errorMessage)
+            every { api.getLiveData() } returns Single.error(exception)
 
             // when
             val resultObserver = dataSource.getDashboardState()
@@ -78,7 +78,7 @@ internal class EmsDataSourceImpTest {
                 .test()
 
             // then
-            resultObserver.assertValue { it == expected }
+            resultObserver.assertValue { it is DashboardState.Error }
         }
 
     }
@@ -101,6 +101,22 @@ internal class EmsDataSourceImpTest {
 
             // then
             resultObserver.assertValue { it == expected }
+        }
+
+        @Test
+        fun `given error, when getDashboardState is called, then result should be the expected`() {
+            // given
+            val errorMessage = "errorMessage"
+            val exception = IllegalArgumentException(errorMessage)
+            every { api.getHistoricDataList() } returns Single.error(exception)
+
+            // when
+            val resultObserver = dataSource.getChartState()
+                .observeOn(Schedulers.trampoline())
+                .test()
+
+            // then
+            resultObserver.assertValue { it is ChartState.Error }
         }
 
     }

@@ -12,10 +12,12 @@ import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.RelaxedMockK
 import io.mockk.mockk
+import io.mockk.verify
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -42,7 +44,8 @@ internal class DashboardScreenViewModelImpTest {
         MockKAnnotations.init(this)
     }
 
-    private fun initViewModel() {
+    @BeforeEach
+    private fun setup() {
         viewModel = DashboardScreenViewModelImp(
             useCase = useCase,
             mapper = mapper,
@@ -55,36 +58,34 @@ internal class DashboardScreenViewModelImpTest {
     }
 
     @Nested
-    inner class Init {
+    inner class GetDashboard {
 
         @Test
-        fun `given a Success DashboardState, when init is executed, then the liveData value should be the expected`() {
+        fun `given a Success DashboardState, when getDashboard is executed, then the liveData value should be the expected`() {
             // given
             val state = mockk<DashboardState.Success>()
-            val expected = mockk<PresentationDashboardState.Success>()
+            val presentationState = mockk<PresentationDashboardState.Success>()
             every { useCase() } returns Single.just(state)
-            every { mapper.from(state) } returns expected
+            every { mapper.from(state) } returns presentationState
 
             // when
-            initViewModel()
+            viewModel.getDashboard()
 
             // then
-            assertEquals(expected, viewModel.dashboardState.value)
+            verify { useCase() }
         }
 
         @Test
-        fun `given a Error DashboardState, when init is executed, then the liveData value should be the expected`() {
+        fun `given a Error DashboardState, when getDashboard is executed, then the liveData value should be the expected`() {
             // given
-            val expected = "errorMessage"
-            val state = mockk<DashboardState.Error>()
+            val state = mockk<DashboardState.Error>(relaxed = true)
             every { useCase() } returns Single.just(state)
-            every { state.message } returns expected
 
             // when
-            initViewModel()
+            viewModel.getDashboard()
 
             // then
-            assertEquals(expected, viewModel.error.value)
+            verify { useCase() }
         }
 
     }
@@ -96,7 +97,6 @@ internal class DashboardScreenViewModelImpTest {
         fun `given initialized viewModel, when openDetail is executed, then the liveData value should be the expected`() {
             // given
             val expected = Detail
-            initViewModel()
 
             // when
             viewModel.openDetail()
@@ -114,7 +114,6 @@ internal class DashboardScreenViewModelImpTest {
         fun `given initialized viewModel, when onBack is executed, then the liveData value should be the expected`() {
             // given
             val expected = Back
-            initViewModel()
 
             // when
             viewModel.onBack()

@@ -1,6 +1,7 @@
 package com.ilizma.ems.data.cache
 
 import com.ilizma.ems.data.model.DashboardState
+import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -13,7 +14,7 @@ internal class DashboardCacheImpTest {
     private lateinit var cache: DashboardCache
 
     @BeforeEach
-    fun setup() {
+    private fun setup() {
         cache = DashboardCacheImp()
     }
 
@@ -44,20 +45,6 @@ internal class DashboardCacheImpTest {
 
             // then
             assertEquals(expected, result)
-        }
-
-    }
-
-    @Nested
-    inner class SetCache {
-
-        @Test
-        fun `when cache is setted, then cache should be executed`() {
-            // given, when
-            cache.cache = mockk()
-
-            // then
-            verify { cache.cache }
         }
 
     }

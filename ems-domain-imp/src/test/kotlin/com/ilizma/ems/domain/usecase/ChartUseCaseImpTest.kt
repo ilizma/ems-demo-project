@@ -24,7 +24,7 @@ internal class ChartUseCaseImpTest {
     }
 
     @BeforeEach
-    fun setup() {
+    private fun setup() {
         dataSource = ChartUseCaseImp(
             repository,
         )

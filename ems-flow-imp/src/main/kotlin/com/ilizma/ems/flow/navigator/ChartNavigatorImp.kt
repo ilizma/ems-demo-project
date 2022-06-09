@@ -4,12 +4,12 @@ import androidx.navigation.NavController
 import com.ilizma.ems.view.fragment.DashboardScreenFragmentDirections
 
 class ChartNavigatorImp(
-    private val navController: NavController,
+    private val navController: () -> NavController,
 ) : ChartNavigator {
 
     override fun navigate() {
         DashboardScreenFragmentDirections.goFromDashboardToChart()
-            .let { navController.navigate(it) }
+            .let { navController().navigate(it) }
     }
 
 }

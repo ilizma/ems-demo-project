@@ -24,7 +24,7 @@ internal class DashboardUseCaseImpTest {
     }
 
     @BeforeEach
-    fun setup() {
+    private fun setup() {
         dataSource = DashboardUseCaseImp(
             repository,
         )

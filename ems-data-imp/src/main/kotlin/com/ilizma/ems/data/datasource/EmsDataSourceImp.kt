@@ -17,11 +17,11 @@ class EmsDataSourceImp(
     override fun getDashboardState(
     ): Single<DashboardState> = api.getLiveData()
         .map { dashboardMapper.from(it) }
-        .doOnError { DashboardState.Error(it.message ?: unknownError) }
+        .onErrorReturn { DashboardState.Error(it.message ?: unknownError) }
 
     override fun getChartState(
     ): Single<ChartState> = api.getHistoricDataList()
         .map { chartMapper.from(it) }
-        .doOnError { DashboardState.Error(it.message ?: unknownError) }
+        .onErrorReturn { ChartState.Error(it.message ?: unknownError) }
 
 }

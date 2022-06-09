@@ -24,6 +24,14 @@ android {
         getByName("test").java.srcDirs("src/test/kotlin")
     }
 
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+
+        unitTests.all {
+            it.useJUnitPlatform()
+        }
+    }
+
 }
 
 dependencies {
