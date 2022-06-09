@@ -191,7 +191,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dashboard_screen_widget_margin"
-                android:background="?attr/selectableItemBackground">
+                android:background="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/colorAccent">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -204,12 +205,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/statistics"
+                        android:textColor="@android:color/white"
                         android:textStyle="bold" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/dashboard_screen_tv_statistics"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@android:color/white"
                         tools:text="464.0" />
 
                 </LinearLayout>
